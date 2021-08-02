@@ -9,13 +9,15 @@ const os = require("os");
 const fs = require("fs");
 
 // 1.
-const folder = process.argv[1];
-// folder가 존재하지 않거나 || fs에 존재하지 않는 경로라면
-if (!folder) {
-  console.error("Please enter folder name in 'Pictures' folder");
-  return;
-}
+const folder = process.argv[2];
 
+// 작업을 할 폴더 = `${os.homedir}/Pictures/${folder}`
 const workingDir = path.join(os.homedir(), "Pictures", folder);
 
 console.log(workingDir);
+
+// 사용자의 input 확인 => folder가 존재하지 않거나 || fs에 존재하지 않는 경로라면
+if (!folder || !fs.existsSync(workingDir)) {
+  console.error("Please enter folder name in 'Pictures' folder");
+  return;
+}
